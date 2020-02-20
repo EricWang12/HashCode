@@ -21,10 +21,33 @@ def knapSack(W , wt , val , n):
   
 # end of function knapSack 
   
+class Library:
+    def __init__(self, books, signupDate,booksPerDay):
+        self.books = books
+        self.signupDate = signupDate
+        self.booksPerDay = booksPerDay
+
+
+
+def readFile(fileName):
+
+    Libraries = list()
+    with open(fileName) as f:
+        a, b, totalDays = [int(x) for x in next(f).split()]
+        bookValue = [int(x) for x in next(f).split()]
+        line = f.readline()
+        while line:
+            bookNum, signupDate, booksPerDay = next(f).split()
+            line = next(f)
+            books = [int(x) for x in line.split()]
+            Libraries.append(Library(books, signupDate, booksPerDay))
+    return bookValue, totalDays, Libraries 
+
+
 # To test above function 
 val = [60, 100, 120] 
 wt = [10, 20, 30] 
 W = 50
 n = len(val) 
-print (knapSack(W , wt , val , n)) 
+print (readFile('a_example.txt')) 
   
